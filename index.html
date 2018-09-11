@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="css/app.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h4>贝塞尔曲线及在 web 中的应用</h4>
+					<p>
+						<small>惠坤</small><br>
+						<small>Thought<strong>Works</strong></small>
+					</p>
+				</section>
+				<section>
+					<h4>摘要</h4>
+					<ol style="font-size: 70%;">
+						<li>贝塞尔曲线由来</li>
+						<li>贝塞尔曲线原理</li>
+						<li>贝塞尔曲线应用</li>
+						<li>Q & A</li>
+					</ol>
+				</section>
+				<section>
+					<section>
+						<h5>贝塞尔曲线由来</h5>
+						<small class="fragment">贝塞尔曲线是由一个叫贝塞尔的人发明的吗？</small>
+					</section>
+					<section>
+						<small>
+							伯恩斯坦于1912年发明了贝塞尔曲线的原始数学公式，即广为人知的伯恩斯坦多项式
+						</small>
+					</section>
+					<section>
+						<small>
+							就职于雪铁龙的法国数学家 Paul de Casteljau 开始对伯恩斯坦多项式进行了图形化的尝试，并且提供了一种数值稳定的德卡斯特里奥（de Casteljau） 算法
+						</small>
+					</section>
+					<section>
+						<small>
+							1962年就职于雷诺的法国工程师皮埃尔·贝塞尔（Pierre Bézier），他使用 德卡斯特里奥 算法来辅助汽车的车体工业设计，并且广泛宣传，因此大家才都称他为贝塞尔曲线
+						</small>
+					</section>
+					<section>
+						<div>
+							<small>所以，贝塞尔曲线到底是啥东西？</small>
+						</div>
+						<img src="./img/bishi.png" height="300px">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h5>贝塞尔曲线原理</h5>
+					</section>
+					<section>
+						<p>站在数学的角度分析一波</p>
+					</section>
+					<section>
+						<div>
+							<small>伯恩斯坦多项式</small>
+						</div>
+						<img src="./img/bernstein.png" height="100px">
+					</section>
+					<section>
+						<div>
+							<small>德卡斯特里奥（de Casteljau） 算法</small>
+						</div>
+						<img class="fragment" src="./img/bezier.png" height="70px">
+						<div class="fragment">
+							<small>带入伯恩斯坦多项式</small>
+						</div>
+						<div class="fragment">
+							<img src="./img/bezier1.png" height="80px">
+						</div>
+					</section>
+					<section>
+						<img src="./img/iamok.png"  height="300px">
+					</section>
+					<section>
+						<p>我们用 js 来实现一波</p>
+					</section>
+					<section>
+						<img src="./img/code.png">
+					</section>
+					<section>
+						<img src="./img/code1.png" height="350px">
+					</section>
+					<section>
+						<img src="./img/bezier1.gif">
+					</section>
+					<section>
+						<p>有没有更亲民一点的方式？</p>
+						<small class="fragment">从设计学的角度来看，贝塞尔曲线是怎么生成的</small>
+					</section>
+					<section>
+						<p>贝塞尔曲线由什么组成？</p>
+						<ol style="font-size: 70%">
+							<li class="fragment">起点</li>
+							<li class="fragment">终点</li>
+							<li class="fragment">至少一个控制点</li>
+						</ol>
+					</section>
+					<section>
+						<p>只有一个控制点的贝塞尔曲线</p>
+					</section>
+					<section>
+						<canvas id="simpleBezier">
+
+						</canvas>
+						<div class="fragment" data-type="simpleBezier" data-step=0></div>
+						<div class="fragment" data-type="simpleBezier" data-step=1 data-prevStep=0></div>
+						<div class="fragment" data-type="simpleBezier" data-step=2 data-prevStep=1></div>
+						<div class="fragment" data-type="simpleBezier" data-step=3 data-prevStep=2></div>
+					</section>
+					<section>
+						<p>两个控制点的贝塞尔曲线怎样生成呢？</p>
+					</section>
+					<section>
+						<canvas id="cubicBezier">
+
+						</canvas>
+						<div class="fragment" data-type="cubicBezier" data-step=0></div>
+						<div class="fragment" data-type="cubicBezier" data-step=1 data-prevStep=0></div>
+						<div class="fragment" data-type="cubicBezier" data-step=2 data-prevStep=1></div>
+						<div class="fragment" data-type="cubicBezier" data-step=3 data-prevStep=2></div>
+						<div class="fragment" data-type="cubicBezier" data-step=4 data-prevStep=3></div>
+					</section>
+					<section>
+						<p>最后，用 Bezier 画一个圆</p>
+					</section>
+					<section>
+						<canvas id="colorfulBezier">
+
+						</canvas>
+						<div class="fragment" data-type="colorfulBezier" data-step=5></div>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>贝塞尔曲线的应用</h4>
+					</section>
+					<section>
+						<p>css timing function: cubic-bezier</p>
+					</section>
+					<section>
+						<img src="./img/cubic-bezier.png" height="350px">
+					</section>
+					<section>
+						<p>pen tool</p>
+					</section>
+					<section>
+						<img src="./img/heart.gif" height="350px">
+					</section>
+					<section>
+						<p>Fancy effects</p>
+					</section>
+					<section>
+						<img src="./img/textBezier.png" height="350px">
+					</section>
+					<section>
+						<img src="./img/lineWave.gif" height="350px">
+					</section>
+					<section>
+						<img src="./img/missYourHeart.gif" height="350px">
+					</section>
+					<section>
+						<img src="./img/roundEffects.gif" width="300px">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>Q & A</h4>
+					</section>
+					<section>
+						<canvas id="fancyBezier" width="300" height="300">
+						</canvas>
+						<div class="fragment" data-type="fancyBezier"></div>
+						<h4>Thanks</h4>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<canvas class="bezier-container">
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="js/bezier.js"></script>
+		<script src="js/fancyBezier.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

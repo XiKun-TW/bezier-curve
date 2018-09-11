@@ -1,0 +1,36 @@
+.bezier-container {
+    position: fixed;
+    top: calc(100vh - 300px);
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.reveal section img {
+    box-shadow: none;
+    border: none;
+}
+
+.reveal pre {
+    box-shadow: none;
+}
+
+canvas {
+    width: 100%;
+}
+
+#fancyBezier {
+    width: 300px;
+    height: 300px;
+}
+
+@media (max-width: 640px) {
+    #fancyBezier {
+        zoom: 0.75;
+    }
+}
+@media (max-width: 480px) {
+    #fancyBezier {
+        zoom: 0.5;
+    }
+}
